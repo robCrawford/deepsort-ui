@@ -1,2 +1,1 @@
-# deepsort-ui
-JavaScript deep sort UI
+# JavaScript deep sort UI
