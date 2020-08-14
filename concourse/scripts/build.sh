@@ -1,3 +1,4 @@
+#!/bin/sh
 set -ex
 
-echo "npm version: $(npm --version)"
+echo "Hello world!"
