@@ -1,0 +1,19 @@
+---
+resources:
+- name: master-src
+  type: git
+  check_every: 10s
+  source:
+    uri: 'git@github.com:robCrawford/deepsort-ui.git'
+    branch: master
+    private_key: ((private_key))
+jobs:
+  - name: build
+    public: true
+    plan:
+    - get: master-src
+      trigger: true
+    - task: hello-world
+      # The name of resources, and later the name of task outputs, determines the name used to access them by other tasks (and later, by updated resources).
+      # So, `hello-world` can access anything from master-src (the git repository) under the `master-src/` path.
+      file: master-src/concourse/tasks/hello-world.yml
