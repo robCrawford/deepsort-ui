@@ -1,22 +1,33 @@
 ---
 resources:
-  - name: master-src
+  - name: deepsort-src
     type: git
     check_every: 10s
     source:
       uri: 'git@github.com:robCrawford/deepsort-ui.git'
       branch: master
       private_key: ((private_key))
+  - name: website-src
+    type: git
+    check_every: 10s
+    source:
+      uri: 'git@github.com:robCrawford/robCrawford.github.io.git'
+      branch: master
+      private_key: ((private_key))
   - name: img-linux
-    type: registry-image
-    source: {repository: busybox}
+    type: docker-image
+    source: {repository: starkandwayne/concourse}
 jobs:
-  - name: build
+  - name: deploy
     public: true
     plan:
       - get: img-linux
-      - get: master-src
+      - get: deepsort-src
         trigger: true
-      - task: build-html
+      - get: website-src
+      - task: deploy-html
         image: img-linux
-        file: master-src/concourse/tasks/build-html.yml
+        file: deepsort-src/concourse/tasks/deploy-html.yml
+      - put: website-src
+        params:
+          repository: updated-website-src
