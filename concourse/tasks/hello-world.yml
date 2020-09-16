@@ -1,5 +1,0 @@
-platform: linux
-inputs:
-  - name: master-src
-run:
-  path: master-src/concourse/scripts/build.sh

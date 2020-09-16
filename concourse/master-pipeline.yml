@@ -17,8 +17,6 @@ jobs:
       - get: img-linux
       - get: master-src
         trigger: true
-      - task: hello-world
+      - task: build-html
         image: img-linux
-        # The name of resources, and later the name of task outputs, determines the name used to access them by other tasks (and later, by updated resources).
-        # So, `hello-world` can access anything from master-src (the git repository) under the `master-src/` path.
-        file: master-src/concourse/tasks/hello-world.yml
+        file: master-src/concourse/tasks/build-html.yml

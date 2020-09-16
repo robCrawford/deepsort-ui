@@ -1,0 +1,7 @@
+platform: linux
+inputs:
+  - name: master-src
+outputs:
+  - name: dist
+run:
+  path: ./master-src/concourse/scripts/build-html.sh
